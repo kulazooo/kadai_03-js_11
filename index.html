@@ -34,12 +34,16 @@ $("#save").on("click" ,function(){
 const key = $("#eng").val(); 
 console.log(key,"eng");
 const value = $("#jp").val(); 
+
+// IDをユニークに
+$('td').attr("#jp", + (i+1));
+
 console.log(value,'value');
 // value [answer: "kaito";
 localStorage.setItem(key,value); //一覧表示に追加
 
 const html = 
-`<tr class="menu"><th>${key}</th><td class="answer">${value}<input type="button" value="日本語" onclick="clickBtn1()" /></td><td><input type="button" value="削除" onclick="SomeDeleteRowFunction(this);"></td></tr>`;
+`<tr class="menu"><th>${key}</th><td class="answer" id="jp">${value}<input type="button" value="日本語" onclick="clickBtn1()" /></td><td><input type="button" value="削除" onclick="SomeDeleteRowFunction(this);"></td></tr>`;
 $("#list").append(html);
 });
 
@@ -77,9 +81,9 @@ function DeleteRow(btndel) {
 
 //アコーディオン表示
 
-document.getElementByClassName('answer').style.display ="none";
+document.getElementByClassId('jp').style.display ="none";
 function clickBtn1(){
-	const jpn = document.getElementByClassName('answer');
+	const jpn = document.getElementByClassId('jp');
 
 	if(jpn.style.display=="block"){
 		// noneで非表示
